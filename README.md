@@ -1,0 +1,1 @@
+Trabalhando com a base de dados Chinook pelo SQLite no VSCode.

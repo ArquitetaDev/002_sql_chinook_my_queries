@@ -1,0 +1,2 @@
+-- SQLite (Exercicio do Curso SQL da IBM: Objetivo: aprender a escrever pseudocódigo)
+-- Obter todos os primeiros e últimos nomes dos funcionários da tabela Employee, que têm "IT Staff" no título.

@@ -1,0 +1,2 @@
+-- SQLite (Exercicio do Curso SQL da IBM: Objetivo: aprender a escrever pseudocódigo)
+-- Pegar todos os primeiros e últimos nomes de todos os clientes da tabela Customer.

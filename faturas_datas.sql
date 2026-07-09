@@ -1,0 +1,2 @@
+-- SQLite (Exercicio do Curso SQL da IBM: Objetivo: aprender a escrever pseudocódigo)
+-- Listar todas as datas de faturas em ordem decrescente.
