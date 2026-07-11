@@ -1,2 +1,5 @@
--- SQLite (Exercicio do Curso SQL da IBM: Objetivo: aprender a escrever pseudocódigo)
--- Obter todos os primeiros e últimos nomes dos funcionários da tabela Employee, que têm "IT Staff" no título.
+-- Obter todos os primeiros e últimos nomes dos funcionários que são de Calgary ou Edmonton.
+
+SELECT FirstName, LastName, City
+FROM Employee
+WHERE City = 'Calgary' OR City = 'Edmonton';

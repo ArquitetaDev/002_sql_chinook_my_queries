@@ -1,2 +1,6 @@
--- SQLite (Exercicio do Curso SQL da IBM: Objetivo: aprender a escrever pseudocódigo)
--- Listar todas as datas de faturas em ordem decrescente.
+-- Listar todas as datas de faturas e valores totais menores que 5.00, em ordem decrescente de data.
+
+SELECT InvoiceDate, Total
+FROM Invoice
+WHERE Total < 5.00
+ORDER BY InvoiceDate DESC;
