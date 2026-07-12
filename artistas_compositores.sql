@@ -18,10 +18,14 @@ WHERE Name LIKE '%ssic%' OR Name LIKE '_le%' ;
     - Identificar tabelas de origem: 'Track' (compositor, música, preço) e 'Genre' (gênero musical).
     - Filtrar faixas por gênero (24-Clássico ou 15-Eletrônico) e preço (< 1.99).
     - Limpar dados: descartar faixas sem compositor definido (NULL).
-    - Ordenação: priorizar agrupamento por Gênero e, dentro dele, o nome da faixa.
+    - Ordenar: agrupar por gênero e nome da faixa.
 */
 
-SELECT Genre.Name, Track.Composer, Track.Name, Track.UnitPrice 
+SELECT 
+  Genre.Name, 
+  Track.Composer, 
+  Track.Name, 
+  Track.UnitPrice 
 FROM Track
 JOIN Genre ON Track.GenreId = Genre.GenreId
 WHERE (Track.GenreId = 24 OR Track.GenreId = 15)

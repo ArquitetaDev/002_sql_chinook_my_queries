@@ -16,3 +16,22 @@ FROM Customer
 JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
 GROUP BY Customer.CustomerId
 ORDER BY SUM(Invoice.Total) DESC;
+
+
+
+/*
+OBJETIVO: Descobrir a média de valor total gasto pelos clientes.
+
+LÓGICA: 
+- Tabelas: Customer (id cliente, sobrenome - maiúsculo), Invoice (total - arredondar para 1 casa decimal e somar).
+- União: O exercício pede JOIN pelas colunas de CEP (o resultado seria impreciso), mas farei a união pelo CustomerId.
+- Agrupar para gerar total por cliente.
+*/
+
+SELECT
+    Customer.CustomerId,
+    UPPER(Customer.LastName), 
+    ROUND(AVG(SUM(Invoice.Total)), 1)
+FROM Customer
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+GROUP BY Customer.CustomerId;

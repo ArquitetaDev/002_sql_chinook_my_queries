@@ -1,10 +1,11 @@
 /*
-  OBJETIVO: Listar clientes com histórico de faturas de baixo valor (< 5.00). 
+OBJETIVO: Listar clientes com histórico de faturas de baixo valor (< 5.00). 
 
-  - Identificar tabelas de origem: 'Customer' (nome cliente) e 'Invoice' (data fatura, valor fatura).
-  - Unir tabelas (JOIN) para listar só faturas com nome de cliente cadastrado.
-  - Filtrar por valor da fatura (< 5.00). 
-  - Ordenar: agrupar por nome do cliente (ASC) e data da fatura (DESC). 
+LÓGICA:
+- Identificar tabelas de origem: 'Customer' (nome cliente) e 'Invoice' (data fatura, valor fatura).
+- Unir tabelas (JOIN) para listar só faturas com nome de cliente cadastrado.
+- Filtrar por valor da fatura (< 5.00). 
+- Ordenar: agrupar por nome do cliente (ASC) e data da fatura (DESC). 
 */
 
 SELECT
