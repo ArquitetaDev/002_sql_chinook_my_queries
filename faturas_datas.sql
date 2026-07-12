@@ -7,7 +7,11 @@
   - Ordenar: agrupar por nome do cliente (ASC) e data da fatura (DESC). 
 */
 
-SELECT Customer.FirstName, Customer.LastName, Invoice.InvoiceDate, Invoice.Total
+SELECT
+    Customer.FirstName, 
+    Customer.LastName, 
+    Invoice.InvoiceDate, 
+    Invoice.Total
 FROM Customer
 JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
 WHERE Invoice.Total < 5.00
