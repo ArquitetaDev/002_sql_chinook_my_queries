@@ -1,67 +1,18 @@
 /*
-1º EXERCÍCIO:
-OBJETIVO: Testar INNER JOIN com as tabelas Cliente e Fatura.
+OBJETIVO: Descobrir quais clientes tiveram maior valor total em compras.
 
 LÓGICA: 
-- Tabelas: Customer (id cliente, sobrenome), Invoice (id fatura).
-- União: O exercício pede JOIN pelas colunas de CEP (o resultado será impreciso).
+- Tabelas: Customer (id cliente, sobrenome - maiúsculo), Invoice (total - arredondar para 1 casa decimal e somar).
+- União: O exercício pede JOIN pelas colunas de CEP (o resultado seria impreciso), mas farei a união pelo CustomerId.
+- Agrupar para gerar total por cliente.
+- Ordenar do maior para o menor valor.
 */
 
 SELECT
     Customer.CustomerId,
-    Customer.LastName, 
-    Invoice.InvoiceId
+    UPPER(Customer.LastName), 
+    ROUND(SUM(Invoice.Total), 1)
 FROM Customer
-JOIN Invoice ON Customer.PostalCode = Invoice.BillingPostalCode;
-
--- 384 resultados. nenhum null. o problema do exercicio: joão tem o mesmo cep que Maria 
--- juntando as colunas pelo cep, a fatura do joao pode ir parar nos dados da maria */
-
-
-
-/*
-2º EXERCÍCIO:
-OBJETIVO: Testar LEFT JOIN com as tabelas Cliente e Fatura.
-
-LÓGICA: 
-- Tabelas: Customer (id cliente, sobrenome), Invoice (id fatura).
-- União: O exercício pede LEFT JOIN pelas colunas de CEP (o resultado será impreciso também).
-*/
-
-/*
-SELECT
-    Customer.CustomerId,
-    Customer.LastName, 
-    Invoice.InvoiceId
-FROM Customer
-LEFT JOIN Invoice ON Customer.PostalCode = Invoice.BillingPostalCode;
-*/
-
--- 388 resultados. nenhum null.
-
-
-
-
-/*
-3º EXERCÍCIO:
-OBJETIVO: Testar RIGHT JOIN com as tabelas Cliente e Fatura.
-
-LÓGICA: 
-- Tabelas: Customer (id cliente, sobrenome), Invoice (id fatura).
-- União: O exercício pede RIGHT JOIN pelas colunas de CEP (o resultado será impreciso também).
-- Como o SQLite não suporta RIGHT JOIN, vou inverter as tabelas e usar LEFT.
-*/
-
-/*
-SELECT
-    Customer.CustomerId,
-    Customer.LastName, 
-    Invoice.InvoiceId
-FROM Invoice
-LEFT JOIN Customer ON Customer.PostalCode = Invoice.BillingPostalCode;
-*/
-
-/* 412 resultados. vários nulls nas colunas customerID e last name.
-indicando que há faturas sem cep ou que há ceps nas faturas que não 
-correspondem aos clientes cadastrados.
-*/
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+GROUP BY Customer.CustomerId
+ORDER BY SUM(Invoice.Total) DESC;
