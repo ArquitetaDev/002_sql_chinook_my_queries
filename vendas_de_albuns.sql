@@ -12,6 +12,7 @@ LÓGICA:
 - Ordenar valores maiores de vendas primeiro.
 */
 
+CREATE VIEW View_VendasAlbuns AS 
 SELECT 
     ar.Name AS Artista, 
     ab.Title AS Álbum, 
@@ -25,5 +26,5 @@ JOIN Genre g    ON t.GenreId = g.GenreId
 WHERE g.Name NOT IN 
 ('TV Shows', 'Drama', 'Sci Fi & Fantasy', 'Comedy', 'Horror', 'Science Fiction')
 GROUP BY ab.Title
-HAVING ValorVendas > 15
+HAVING SUM(i.Quantity * i.UnitPrice) > 15
 ORDER BY ValorVendas DESC;
