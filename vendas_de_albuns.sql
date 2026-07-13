@@ -13,21 +13,25 @@ Use aliases para maior clareza: simplifique os cabeçalhos das colunas e as refe
 */
 
 /*
-OBJETIVO: Gerar relatório de vendas totais de cada álbum, agrupados por artista.
+OBJETIVO: Gerar relatório de vendas totais de cada álbum, os mais vendidos primeiro.
 
 LÓGICA:
-- Mostrar colunas: Artist.Name, Album.Title, COUNT InvoiceLine.TrackId
+- Mostrar colunas: Artist.Name, Album.Title, COUNT InvoiceLine.TrackId, soma das vendas por álbum.
 - InvoiceLine.TrackId = Track.TrackId, Track.AlbumId = Album.AlbumId para pegar nome album
+- Filtrar excluindo o que não é música.
 */
 
 SELECT 
     ar.Name AS Artista, 
     ab.Title AS Álbum, 
-    COUNT(i.TrackId) AS 'Qtd Faixas Vendidas',
-    ((COUNT(i.TrackId)) * i.Quantity * i.UnitPrice) AS 'Valor Total de Vendas'
+    COUNT(i.TrackId) AS QtdVendas,
+    SUM(i.Quantity * i.UnitPrice) AS ValorVendas
 FROM InvoiceLine i
-LEFT JOIN Track t   ON i.TrackId = t.TrackId
-JOIN Album ab       ON t.AlbumId = ab.AlbumId
-JOIN Artist ar      ON ab.ArtistId = ar.ArtistId
+JOIN Track t    ON i.TrackId = t.TrackId
+JOIN Album ab   ON t.AlbumId = ab.AlbumId
+JOIN Artist ar  ON ab.ArtistId = ar.ArtistId
+JOIN Genre g    ON t.GenreId = g.GenreId 
+WHERE g.Name NOT IN 
+('TV Shows', 'Drama', 'Sci Fi & Fantasy', 'Comedy', 'Horror', 'Science Fiction')
 GROUP BY ab.Title
-ORDER BY COUNT(i.TrackId) DESC;
+ORDER BY ValorVendas DESC;
