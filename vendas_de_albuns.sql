@@ -1,24 +1,15 @@
 /*
-EXERCICIO:
-
-Você deseja gerar um relatório mostrando os títulos dos álbuns de cada artista e o total de vendas. A consulta precisa ser clara e eficiente:
-
-Entenda o objetivo final: defina o que você deseja ver — nomes de artistas, títulos de álbuns e totais de vendas.
-
-Selecione suas tabelas: utilize Artist, Album, InvoiceLine, Track e Genre.
-
-Aplique transformações: use agregação para calcular o total de vendas.
-
-Use aliases para maior clareza: simplifique os cabeçalhos das colunas e as referências às tabelas.
-*/
-
-/*
 OBJETIVO: Gerar relatório de vendas totais de cada álbum, os mais vendidos primeiro.
 
 LÓGICA:
-- Mostrar colunas: Artist.Name, Album.Title, COUNT InvoiceLine.TrackId, soma das vendas por álbum.
-- InvoiceLine.TrackId = Track.TrackId, Track.AlbumId = Album.AlbumId para pegar nome album
-- Filtrar excluindo o que não é música.
+- Mostrar colunas: Nome Artista, Nome Album, Número de Vendas de Faixas por Álbum, Valor de Vendas por Álbum.
+- Unir tabelas: Invoice, Track e Album para pegar o Nome Álbum,
+                Artista para pegar o Nome Artista,
+                GenreId para poder filtrar o gênero.
+- Filtrar por gênero excluindo o que não é música.
+- Agrupar valores de vendas por Álbum.
+- Filtrar só os maiores de 15. 
+- Ordenar valores maiores de vendas primeiro.
 */
 
 SELECT 
@@ -34,4 +25,5 @@ JOIN Genre g    ON t.GenreId = g.GenreId
 WHERE g.Name NOT IN 
 ('TV Shows', 'Drama', 'Sci Fi & Fantasy', 'Comedy', 'Horror', 'Science Fiction')
 GROUP BY ab.Title
+HAVING ValorVendas > 15
 ORDER BY ValorVendas DESC;
