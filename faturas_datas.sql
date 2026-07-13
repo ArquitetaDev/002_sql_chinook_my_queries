@@ -11,10 +11,10 @@ LÓGICA:
 */
 
 SELECT
-    CONCAT(Customer.FirstName, ' ', Customer.LastName), 
-    FORMAT(Invoice.InvoiceDate, 'dd-MM-yyyy'), 
-    Invoice.Total
-FROM Customer
-JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
-WHERE Invoice.Total < 5.00
-ORDER BY Customer.FirstName, Invoice.InvoiceDate DESC;
+    CONCAT(c.FirstName, ' ', c.LastName) AS FullName,
+    FORMAT(i.InvoiceDate, 'dd-MM-yyyy'), 
+    i.Total
+FROM Customer c
+JOIN Invoice i ON c.CustomerId = i.CustomerId
+WHERE i.Total < 5.00
+ORDER BY c.FirstName, i.InvoiceDate DESC;
