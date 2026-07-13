@@ -5,7 +5,7 @@ LÓGICA:
 - Mostrar colunas: NomeArtista, TotalVendas.
 - Tabelas: Artist.Name, 
 - Para obter total vendas: 
-    Unir tabelas para linkar Track com o artista:
+    Unir tabelas para linkar track com o artista:
         Artist.ArtistId = Album.ArtistId (pega Id do artista) 
         Album.AlbumId = Track.AlbumId (pega Id do album do artista) 
         InvoiceLine.TrackId = Track.TrackId (pega Id da track do artista)
@@ -20,5 +20,5 @@ JOIN    Album al        ON ar.ArtistId = al.ArtistId
 JOIN    Track t         ON al.AlbumId = t.AlbumId
 JOIN    InvoiceLine i   ON t.TrackId = i.TrackId 
 GROUP BY ar.Name
-HAVING  TotalVendas > 25
+HAVING   SUM(i.Quantity * i.UnitPrice) > 25
 ORDER BY TotalVendas DESC;
