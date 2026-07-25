@@ -1,13 +1,11 @@
-Repositório dos meus exercícios do curso SQL Foundations (Microsoft), 
-com a base de dados Chinook - SQLite no VSCode.
-
+# Repositório dos meus exercícios do curso SQL Foundations (Microsoft)  
+## Com a base de dados Chinook - SQLite no VSCode
+<pre>
 Exemplo de query criada por mim neste repositório:
+  
+Arquivo: vendas_de_albuns.sql  
+</pre>  
 
-Arquivo: vendas_de_albuns.sql
-
-
-
-/*
 OBJETIVO: Gerar relatório de vendas totais de cada álbum, os mais vendidos primeiro.
 
 LÓGICA:
@@ -19,13 +17,14 @@ LÓGICA:
 - Agrupar valores de vendas por Álbum.
 - Filtrar só os maiores de 15. 
 - Ordenar valores maiores de vendas primeiro.
-*/
 
-CREATE VIEW View_VendasAlbuns AS 
-SELECT 
-    ar.Name AS Artista, 
-    ab.Title AS Álbum, 
-    COUNT(i.TrackId) AS QtdVendas,
+
+<pre>
+CREATE VIEW View_VendasAlbuns AS  
+SELECT   
+    ar.Name AS Artista,   
+    ab.Title AS Álbum,  
+    COUNT(i.TrackId) AS QtdVendas,  
     SUM(i.Quantity * i.UnitPrice) AS ValorVendas
 FROM InvoiceLine i
 JOIN Track t    ON i.TrackId = t.TrackId
@@ -37,3 +36,4 @@ WHERE g.Name NOT IN
 GROUP BY ab.Title
 HAVING SUM(i.Quantity * i.UnitPrice) > 15
 ORDER BY ValorVendas DESC;
+</pre>
